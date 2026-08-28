@@ -1,0 +1,2346 @@
+app:
+  description: 你好，我是你的生活小助手。我擅长帮你解决日常生活中的各种小麻烦——无论是家电异常、管道堵塞、网络故障，还是室内返潮、衣物清洁、睡眠困扰，只要你说清楚问题，我就能为你整理出清晰、可执行的检验步骤。我会用最简单的话告诉你：问题出在哪、可能是什么原因、具体该怎么处理，还会在必要时生成示意图，让你一看就懂。如果情况超出自行处理范围，我也会建议你何时该求助专业人士。把琐事交给我，你把时间留给生活。随时可以开始提问。
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 生活小助手Agent
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.15@1df8bd27d67c149e6db3c210830ef6e3857c5a9df5e8edbe9e785b995f337ef5
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables:
+  - description: ''
+    id: 1859f778-1d4c-41b5-bf2e-0244e35d970a
+    name: conversation_var
+    selector:
+    - conversation
+    - conversation_var
+    value: ''
+    value_type: string
+  - description: ''
+    id: ac9d5382-f4d3-435d-af63-59fce3400573
+    name: clarify_count
+    selector:
+    - conversation
+    - clarify_count
+    value: 0
+    value_type: integer
+  - description: ''
+    id: f9cab229-b263-44a4-8369-0210524c5d0c
+    name: last_round
+    selector:
+    - conversation
+    - last_round
+    value: ''
+    value_type: string
+  - description: ''
+    id: 047a784d-15d1-4da2-aa3d-d5bde582acdd
+    name: issue_type
+    selector:
+    - conversation
+    - issue_type
+    value: ''
+    value_type: string
+  - description: ''
+    id: 2d666ea6-5fdf-43d5-ace3-cafc29459e38
+    name: poll_count
+    selector:
+    - conversation
+    - poll_count
+    value: 0
+    value_type: integer
+  - description: ''
+    id: a68e77c4-f663-429c-be42-4592a08b36f0
+    name: final_task_status
+    selector:
+    - conversation
+    - final_task_status
+    value: ''
+    value_type: string
+  - description: ''
+    id: 3d38efcc-c791-4a21-9b5f-8aff6262295b
+    name: final_image_url
+    selector:
+    - conversation
+    - final_image_url
+    value: ''
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 15
+        single_chunk_attachment_limit: 10
+        skill_file_size_limit: 50
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 您好，生活助手为您服务。请问有什么问题可以帮您？
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1787819288800-source-1787819595246-target
+      source: '1787819288800'
+      sourceHandle: source
+      target: '1787819595246'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1787819595246-source-1787819607242-target
+      source: '1787819595246'
+      sourceHandle: source
+      target: '1787819607242'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1787819607242-true-1787820352815-target
+      source: '1787819607242'
+      sourceHandle: 'true'
+      target: '1787820352815'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1787819607242-aac5656f-e62a-4252-836d-75632ddb776a-1787820371291-target
+      source: '1787819607242'
+      sourceHandle: aac5656f-e62a-4252-836d-75632ddb776a
+      target: '1787820371291'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1787819607242-d166f6d4-eb99-4d6d-bc23-3ccd02215b7c-1787820394626-target
+      source: '1787819607242'
+      sourceHandle: d166f6d4-eb99-4d6d-bc23-3ccd02215b7c
+      target: '1787820394626'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1787819607242-false-1787820407001-target
+      source: '1787819607242'
+      sourceHandle: 'false'
+      target: '1787820407001'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: if-else
+      id: 1787820394626-source-1787820873153-target
+      source: '1787820394626'
+      sourceHandle: source
+      target: '1787820873153'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1787820873153-true-1787820599916-target
+      source: '1787820873153'
+      sourceHandle: 'true'
+      target: '1787820599916'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1787820873153-false-1787820407001-target
+      source: '1787820873153'
+      sourceHandle: 'false'
+      target: '1787820407001'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: assigner
+      id: 1787820352815--1787821113316-target
+      source: '1787820352815'
+      sourceHandle: source
+      target: '1787821113316'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: assigner
+      id: 1787820371291--1787821195971-target
+      source: '1787820371291'
+      sourceHandle: source
+      target: '1787821195971'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: assigner
+      id: 1787820599916-source-1787821223854-target
+      source: '1787820599916'
+      sourceHandle: source
+      target: '1787821223854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: assigner
+      id: 1787820407001-source-1787821318004-target
+      source: '1787820407001'
+      sourceHandle: source
+      target: '1787821318004'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: variable-aggregator
+      id: 1787821223854-source-1787821554759-target
+      source: '1787821223854'
+      sourceHandle: source
+      target: '1787821554759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: variable-aggregator
+      id: 1787821318004-source-1787821554759-target
+      source: '1787821318004'
+      sourceHandle: source
+      target: '1787821554759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: variable-aggregator
+      id: 1787821195971-source-1787821554759-target
+      source: '1787821195971'
+      sourceHandle: source
+      target: '1787821554759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: assigner
+        targetType: variable-aggregator
+      id: 1787821113316-source-1787821554759-target
+      source: '1787821113316'
+      sourceHandle: source
+      target: '1787821554759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: variable-aggregator
+        targetType: if-else
+      id: 1787821554759-source-1787820227960-target
+      source: '1787821554759'
+      sourceHandle: source
+      target: '1787820227960'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1787820227960-true-1787821737202-target
+      source: '1787820227960'
+      sourceHandle: 'true'
+      target: '1787821737202'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 1787820227960-3a3475a5-cec4-490e-a8e2-0a411a4c8e5c-1787821776736-target
+      source: '1787820227960'
+      sourceHandle: 3a3475a5-cec4-490e-a8e2-0a411a4c8e5c
+      target: '1787821776736'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 1787820227960-false-1787821776736-target
+      source: '1787820227960'
+      sourceHandle: 'false'
+      target: '1787821776736'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: template-transform
+      id: 1787821737202-source-1787821989921-target
+      source: '1787821737202'
+      sourceHandle: source
+      target: '1787821989921'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: http-request
+      id: 1787821989921-source-1787821851814-target
+      source: '1787821989921'
+      sourceHandle: source
+      target: '1787821851814'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1787821851814-source-1787822061301-target
+      source: '1787821851814'
+      sourceHandle: source
+      target: '1787822061301'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: loop
+      id: 1787822061301-source-1787822169803-target
+      source: '1787822061301'
+      sourceHandle: source
+      target: '1787822169803'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: loop-start
+        targetType: http-request
+      id: 1787822169803start-source-1787822183491-target
+      source: 1787822169803start
+      sourceHandle: source
+      target: '1787822183491'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: http-request
+        targetType: code
+      id: 1787822183491-source-1787822672073-target
+      source: '1787822183491'
+      sourceHandle: source
+      target: '1787822672073'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: code
+        targetType: if-else
+      id: 1787822672073-source-1787822826730-target
+      source: '1787822672073'
+      sourceHandle: source
+      target: '1787822826730'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: if-else
+        targetType: assigner
+      id: 1787822826730-true-1787822909620-target
+      source: '1787822826730'
+      sourceHandle: 'true'
+      target: '1787822909620'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: if-else
+        targetType: assigner
+      id: 1787822826730-70ffc966-15d4-48cb-a637-0e1ab720dca3-1787822914782-target
+      source: '1787822826730'
+      sourceHandle: 70ffc966-15d4-48cb-a637-0e1ab720dca3
+      target: '1787822914782'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: if-else
+        targetType: code
+      id: 1787822826730-false-1787822920969-target
+      source: '1787822826730'
+      sourceHandle: 'false'
+      target: '1787822920969'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: code
+        targetType: assigner
+      id: 1787822920969-source-1787823150678-target
+      source: '1787822920969'
+      sourceHandle: source
+      target: '1787823150678'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        sourceType: assigner
+        targetType: answer
+      id: 1787822909620-source-1787823207641-target
+      source: '1787822909620'
+      sourceHandle: source
+      target: '1787823207641'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: loop
+        targetType: if-else
+      id: 1787822169803-source-1787823445155-target
+      source: '1787822169803'
+      sourceHandle: source
+      target: '1787823445155'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1787823445155-true-1787823549758-target
+      source: '1787823445155'
+      sourceHandle: 'true'
+      target: '1787823549758'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1787823445155-7759dad3-be6f-4fcf-8ef8-22ae23316500-1787823673376-target
+      source: '1787823445155'
+      sourceHandle: 7759dad3-be6f-4fcf-8ef8-22ae23316500
+      target: '1787823673376'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1787823445155-false-1787823727082-target
+      source: '1787823445155'
+      sourceHandle: 'false'
+      target: '1787823727082'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: variable-aggregator
+      id: 1787823727082--1787823777584-target
+      source: '1787823727082'
+      sourceHandle: source
+      target: '1787823777584'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: variable-aggregator
+      id: 1787823673376-source-1787823777584-target
+      source: '1787823673376'
+      sourceHandle: source
+      target: '1787823777584'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: template-transform
+        targetType: variable-aggregator
+      id: 1787823549758-source-1787823777584-target
+      source: '1787823549758'
+      sourceHandle: source
+      target: '1787823777584'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: variable-aggregator
+        targetType: answer
+      id: 1787823777584-source-1787823854322-target
+      source: '1787823777584'
+      sourceHandle: source
+      target: '1787823854322'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables: []
+      height: 72
+      id: '1787819288800'
+      position:
+        x: 0
+        y: 189.53730158730156
+      positionAbsolute:
+        x: 0
+        y: 189.53730158730156
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        code: "\nimport re\n\ndef main(query: str) -> dict:  # 去掉标点和空格，把“冰箱，不制冷？”变成“冰箱不制冷”。这样更容易匹配关键词。\n\
+          \    raw_text = query or \"\"\n    text = raw_text.strip()\n    text_lower\
+          \ = text.lower()\n\n    # 去掉空格和常见标点，方便判断\n    text_compact = re.sub(r\"\
+          [\\s，。！？、,.!?；;：:（）()【】\\[\\]\\\"'“”‘’]\", \"\", text_lower)\n\n    # 统一返回结构：不改变你的输出变量\n\
+          \    def make_result(matched=False, need_rag=False, need_clarify=False,\n\
+          \                    problem=\"\", cause=\"\", method=\"\", rag_query=\"\
+          \", answer_text=\"\"):\n        return {\n            \"matched\": matched,\n\
+          \            \"need_rag\": need_rag,\n            \"need_clarify\": need_clarify,\n\
+          \            \"problem\": problem,\n            \"cause\": cause,\n    \
+          \        \"method\": method,\n            \"rag_query\": rag_query,\n  \
+          \          \"answer_text\": answer_text\n        }\n\n    # 规则命中后的标准回复\n\
+          \    def build_answer(problem: str, cause: str, method: str) -> str:\n \
+          \       return f\"\"\"【问题判断】\n{problem}\n\n【可能原因】\n{cause}\n\n【处理方法】\n{method}\n\
+          \n【何时进一步求助】\n如果按照上述步骤处理后仍无效，或涉及人身安全、用电风险、燃气风险、严重身体不适等情况，请尽快联系专业人员或相关机构。\"\
+          \"\"\n\n    # 生活问题规则库 里面存了问题、关键词、原因、方法。常见问题时，不用查知识库，直接命中更稳定。\n    bug_db\
+          \ = [\n        {\n            \"problem\": \"Wi-Fi不稳定/网络断连\",\n        \
+          \    \"keywords\": [\"wifi\", \"wi-fi\", \"网络断\", \"断网\", \"连不上网\", \"信号差\"\
+          , \"网速慢\", \"路由器\"],\n            \"cause\": \"可能是路由器长时间未重启、宽带波动、设备距离路由器太远，或同时联网设备过多。\"\
+          ,\n            \"method\": \"1. 先重启路由器和光猫；2. 靠近路由器重新测试；3. 关闭占网设备或后台下载；4.\
+          \ 检查宽带是否欠费或运营商是否异常；5. 仍无效时联系网络运营商。\"\n        },\n        {\n          \
+          \  \"problem\": \"手机卡顿/发热严重\",\n            \"keywords\": [\"手机卡\", \"手机发热\"\
+          , \"发热\", \"很烫\", \"卡顿\", \"反应慢\", \"掉帧\", \"耗电快\"],\n            \"cause\"\
+          : \"可能是后台程序过多、存储空间不足、长时间高负载运行、系统缓存过多或电池老化。\",\n            \"method\": \"\
+          1. 关闭后台应用；2. 清理存储空间；3. 重启手机；4. 关闭高耗电功能；5. 若持续异常可检查系统更新或售后检测电池。\"\n     \
+          \   },\n        {\n            \"problem\": \"冰箱不制冷/制冷变差\",\n          \
+          \  \"keywords\": [\"冰箱不冷\", \"冰箱不制冷\", \"不制冷\", \"冷藏不冷\", \"冷冻不冷\", \"冰箱坏了\"\
+          ],\n            \"cause\": \"可能是温控档位异常、开门过于频繁、散热空间不足、密封条老化，或压缩机、制冷系统异常。\"\
+          ,\n            \"method\": \"1. 检查温度档位是否正确；2. 减少频繁开门；3. 确保冰箱两侧留有散热空间；4.\
+          \ 检查密封条是否贴合；5. 若长时间不制冷，联系专业维修。\"\n        },\n        {\n            \"\
+          problem\": \"空调不制冷/不制热\",\n            \"keywords\": [\"空调不冷\", \"空调不热\"\
+          , \"空调不制冷\", \"空调不制热\", \"空调没反应\"],\n            \"cause\": \"可能是模式设置错误、滤网积灰、电源异常、缺氟或室外机故障。\"\
+          ,\n            \"method\": \"1. 检查模式是否切换正确；2. 清洗滤网；3. 检查遥控器和电源；4. 适当等待系统启动；5.\
+          \ 若仍无效，联系专业售后检修。\"\n        },\n        {\n            \"problem\": \"洗衣机不排水/不脱水\"\
+          ,\n            \"keywords\": [\"洗衣机不排水\", \"洗衣机不脱水\", \"不脱水\", \"排不了水\"\
+          , \"洗衣机故障\", \"洗衣机坏了\"],\n            \"cause\": \"可能是排水管堵塞、衣物放置不平衡、排水泵异常或程序设置问题。\"\
+          ,\n            \"method\": \"1. 检查排水管是否弯折或堵塞；2. 重新整理衣物；3. 重启洗衣机并重新选择程序；4.\
+          \ 若反复出现，联系维修人员。\"\n        },\n        {\n            \"problem\": \"下水道堵塞/排水慢\"\
+          ,\n            \"keywords\": [\"堵了\", \"下水道堵\", \"下水道堵了\", \"排水慢\", \"洗手池堵\"\
+          , \"厕所堵\", \"地漏堵\"],\n            \"cause\": \"可能是毛发、油污、杂物堆积导致管道堵塞。\",\n\
+          \            \"method\": \"1. 先用热水或疏通剂尝试处理；2. 清理表面可见杂物；3. 使用皮搋子或疏通工具；4.\
+          \ 若完全不通或反复堵塞，联系物业或专业疏通。\"\n        },\n        {\n            \"problem\"\
+          : \"水龙头漏水\",\n            \"keywords\": [\"水龙头漏\", \"水龙头漏水\", \"漏水\", \"\
+          滴水\", \"一直流水\"],\n            \"cause\": \"可能是密封圈老化、接口松动或阀芯磨损。\",\n    \
+          \        \"method\": \"1. 先关闭角阀；2. 检查接口是否松动；3. 更换密封圈；4. 若阀芯老化明显，联系维修或更换龙头。\"\
+          \n        },\n        {\n            \"problem\": \"房间返潮/墙面发霉\",\n     \
+          \       \"keywords\": [\"返潮\", \"发霉\", \"墙面发霉\", \"潮湿\", \"霉味\", \"墙面潮湿\"\
+          ],\n            \"cause\": \"可能是通风不足、梅雨天湿度高、外墙渗水或长期阳光不足。\",\n          \
+          \  \"method\": \"1. 增加通风；2. 使用除湿机或空调除湿；3. 清理霉斑并保持干燥；4. 若反复严重，检查墙体渗水问题。\"\
+          \n        },\n        {\n            \"problem\": \"衣服异味/发黄\",\n       \
+          \     \"keywords\": [\"衣服臭\", \"衣服异味\", \"发黄\", \"洗不干净\", \"衣服有味道\"],\n\
+          \            \"cause\": \"可能是晾晒不及时、洗衣液残留、汗渍积累或受潮发霉。\",\n            \"method\"\
+          : \"1. 重新清洗并充分漂洗；2. 尽快晾晒；3. 使用温和去渍产品；4. 长期发黄可分类处理，不同材质谨慎漂白。\"\n        },\n\
+          \        {\n            \"problem\": \"食物受潮/变质\",\n            \"keywords\"\
+          : [\"食物受潮\", \"受潮\", \"变质\", \"发霉\", \"坏了\", \"不能吃了\"],\n            \"\
+          cause\": \"可能是存放环境潮湿、密封不严、保存时间过长或温度不合适。\",\n            \"method\": \"1.\
+          \ 检查保质期；2. 受潮发霉的食物不要继续食用；3. 密封保存并放置干燥环境；4. 需冷藏的食物及时冷藏。\"\n        },\n \
+          \       {\n            \"problem\": \"睡眠不好/难以入睡\",\n            \"keywords\"\
+          : [\"睡不着\", \"失眠\", \"难入睡\", \"睡眠不好\", \"总醒\"],\n            \"cause\":\
+          \ \"可能是作息紊乱、压力过大、睡前使用电子设备或咖啡因摄入过多。\",\n            \"method\": \"1. 尽量固定作息；2.\
+          \ 睡前减少看手机；3. 避免晚间摄入咖啡因；4. 若长期严重影响生活，建议及时就医咨询。\"\n        },\n        {\n\
+          \            \"problem\": \"室内异味重\",\n            \"keywords\": [\"有味道\"\
+          , \"异味\", \"臭味\", \"房间臭\", \"怪味\", \"房间有味道\"],\n            \"cause\": \"\
+          可能与垃圾未及时清理、潮湿发霉、下水道返味或通风不足有关。\",\n            \"method\": \"1. 先排查垃圾和潮湿源；2.\
+          \ 开窗通风；3. 检查下水道和地漏；4. 必要时使用除味或除湿设备。\"\n        }\n    ]\n\n    # 0. 空输入\
+          \ -> 澄清\n    if not text_compact:\n        return make_result(\n       \
+          \     matched=False,\n            need_rag=False,\n            need_clarify=True,\n\
+          \            problem=\"未提供问题描述\",\n            cause=\"用户没有输入具体生活问题。\",\n\
+          \            method=\"请直接描述你遇到的问题，例如：Wi-Fi总断、冰箱不制冷、下水道堵了、手机发热严重。\",\n  \
+          \          rag_query=\"\",\n            answer_text=\"你先描述一下你遇到的具体问题，比如“Wi-Fi总断”“冰箱不制冷”“手机发热严重”“下水道堵了”。\"\
+          \n        )\n\n    # 1. 身份介绍 / 闲聊 / 非生活类短对话 ->  存放“你好”“你是谁”等日常对话\n    casual_exact\
+          \ = [\n        \"你是谁\", \"你是\", \"你叫什么\", \"你叫啥\", \"你能做什么\", \"你可以做什么\"\
+          ,\n        \"你有什么用\", \"你是干嘛的\", \"你是做什么的\", \"介绍一下你\", \"介绍下你\",\n    \
+          \    \"你好\", \"您好\", \"嗨\", \"哈喽\", \"hello\", \"hi\", \"哈哈\", \"哈哈哈\",\n\
+          \        \"嘻嘻\", \"嘻嘻嘻\", \"嘿嘿\", \"在吗\", \"早上好\", \"晚上好\", \"谢谢\",\n  \
+          \      \"谢了\", \"不错\", \"可以\", \"好的\", \"嗯嗯\"\n    ]\n\n    if text_compact\
+          \ in casual_exact:\n        return make_result(\n            matched=False,\n\
+          \            need_rag=False,\n            need_clarify=False,\n        \
+          \    problem=\"非生活问题或日常对话\",\n            cause=\"\",\n            method=\"\
+          \",\n            rag_query=\"\",\n            answer_text=\"我是生活小助手，可以帮你处理日常生活中的一些问题，比如家电异常、门窗受潮、下水道堵塞、室内异味、衣物清洁等。如果你描述具体问题，我会帮你一步步排查。\"\
+          \n        )\n\n    if text_compact.startswith(\"你是\") and len(text_compact)\
+          \ <= 12:\n        return make_result(\n            matched=False,\n    \
+          \        need_rag=False,\n            need_clarify=False,\n            problem=\"\
+          身份介绍类问题\",\n            cause=\"\",\n            method=\"\",\n        \
+          \    rag_query=\"\",\n            answer_text=\"我是生活小助手，可以帮你处理日常生活中的一些问题，比如家电异常、门窗受潮、下水道堵塞、室内异味、衣物清洁等。如果你描述具体问题，我会帮你一步步排查。\"\
+          \n        )\n\n    if re.fullmatch(r\"(哈|哈哈|嘻|嘻嘻|嘿|嘿嘿|嗯|嗯嗯|啊|啊啊|哦|哦哦|啦|啦啦)+\"\
+          , text_compact):\n        return make_result(\n            matched=False,\n\
+          \            need_rag=False,\n            need_clarify=False,\n        \
+          \    problem=\"日常闲聊\",\n            cause=\"\",\n            method=\"\"\
+          ,\n            rag_query=\"\",\n            answer_text=\"我在呢。你可以直接告诉我遇到的生活问题，比如“门关不上了”“冰箱不制冷”“下水道堵了”，我会帮你一步步排查。\"\
+          \n        )\n\n    # 2. 明确模糊输入 -> 存放“坏了”“怎么办”等太模糊的话。\n    vague_words =\
+          \ [\n        \"有问题\", \"怎么办\", \"不对劲\", \"帮我看看\", \"怪怪的\",\n        \"不知道怎么弄\"\
+          , \"有点异常\", \"坏了\", \"坏啦\", \"出问题了\", \"不行了\"\n    ]\n\n    meaningless_samples\
+          \ = [\n        \"asdf\", \"asd\", \"qwe\", \"zxc\", \"test\", \"测试测试\",\n\
+          \        \"阿斯顿发\", \"随便打的\", \"乱输的\", \"不知道\"\n    ]\n\n    if text_compact\
+          \ in vague_words:\n        return make_result(\n            matched=False,\n\
+          \            need_rag=False,\n            need_clarify=True,\n         \
+          \   problem=\"问题描述过于模糊\",\n            cause=\"当前信息不足，无法准确判断属于哪类生活问题。\"\
+          ,\n            method=\"请补充具体症状、发生场景、持续时间，以及你已经尝试过的方法。\",\n            rag_query=\"\
+          \",\n            answer_text=\"我先帮你判断一下，你再补充一点信息：具体表现、发生场景、持续多久了，以及你已经尝试过什么方法。\"\
+          \n        )\n\n    if text_compact in meaningless_samples:\n        return\
+          \ make_result(\n            matched=False,\n            need_rag=False,\n\
+          \            need_clarify=True,\n            problem=\"问题描述过于模糊\",\n   \
+          \         cause=\"当前信息不足，无法准确判断属于哪类生活问题。\",\n            method=\"请补充具体症状、发生场景、持续时间，以及你已经尝试过的方法。\"\
+          ,\n            rag_query=\"\",\n            answer_text=\"我先帮你判断一下，你再补充一点信息：具体表现、发生场景、持续多久了，以及你已经尝试过什么方法。\"\
+          \n        )\n\n    if len(text_compact) <= 2:\n        return make_result(\n\
+          \            matched=False,\n            need_rag=False,\n            need_clarify=True,\n\
+          \            problem=\"问题描述过于模糊\",\n            cause=\"当前信息不足，无法准确判断属于哪类生活问题。\"\
+          ,\n            method=\"请补充具体症状、发生场景、持续时间，以及你已经尝试过的方法。\",\n            rag_query=\"\
+          \",\n            answer_text=\"我先帮你判断一下，你再补充一点信息：具体表现、发生场景、持续多久了，以及你已经尝试过什么方法。\"\
+          \n        )\n\n    if re.fullmatch(r\"[a-z0-9]{1,10}\", text_compact):\n\
+          \        return make_result(\n            matched=False,\n            need_rag=False,\n\
+          \            need_clarify=True,\n            problem=\"问题描述过于模糊\",\n   \
+          \         cause=\"当前信息不足，无法准确判断属于哪类生活问题。\",\n            method=\"请补充具体症状、发生场景、持续时间，以及你已经尝试过的方法。\"\
+          ,\n            rag_query=\"\",\n            answer_text=\"我先帮你判断一下，你再补充一点信息：具体表现、发生场景、持续多久了，以及你已经尝试过什么方法。\"\
+          \n        )\n\n    if re.fullmatch(r\"[\\W_]+\", text_compact):\n      \
+          \  return make_result(\n            matched=False,\n            need_rag=False,\n\
+          \            need_clarify=True,\n            problem=\"问题描述过于模糊\",\n   \
+          \         cause=\"当前信息不足，无法准确判断属于哪类生活问题。\",\n            method=\"请补充具体症状、发生场景、持续时间，以及你已经尝试过的方法。\"\
+          ,\n            rag_query=\"\",\n            answer_text=\"我先帮你判断一下，你再补充一点信息：具体表现、发生场景、持续多久了，以及你已经尝试过什么方法。\"\
+          \n        )\n\n    if len(set(text_compact)) == 1 and len(text_compact)\
+          \ >= 2:\n        return make_result(\n            matched=False,\n     \
+          \       need_rag=False,\n            need_clarify=True,\n            problem=\"\
+          问题描述过于模糊\",\n            cause=\"当前信息不足，无法准确判断属于哪类生活问题。\",\n           \
+          \ method=\"请补充具体症状、发生场景、持续时间，以及你已经尝试过的方法。\",\n            rag_query=\"\"\
+          ,\n            answer_text=\"我先帮你判断一下，你再补充一点信息：具体表现、发生场景、持续多久了，以及你已经尝试过什么方法。\"\
+          \n        )\n\n    # 3. 先查规则库：明确如果是这个代码中上面写的生活问题直接命中计算哪个规则最匹配用户输入。如果多个规则都有词命中，选匹配度最高的。\n\
+          \    best_item = None\n    best_score = 0\n\n    for item in bug_db:\n \
+          \       score = 0\n        for kw in item[\"keywords\"]:\n            kw_lower\
+          \ = kw.lower()\n            kw_compact = re.sub(r\"[\\s，。！？、,.!?；;：:（）()【】\\\
+          [\\]\\\"'“”‘’]\", \"\", kw_lower)\n            if kw_compact and kw_compact\
+          \ in text_compact:\n                score += len(kw_compact)\n        if\
+          \ score > best_score:\n            best_score = score\n            best_item\
+          \ = item\n\n    if best_item and best_score > 0:\n        return make_result(\n\
+          \            matched=True,\n            need_rag=False,\n            need_clarify=False,\n\
+          \            problem=best_item[\"problem\"],\n            cause=best_item[\"\
+          cause\"],\n            method=best_item[\"method\"],\n            rag_query=\"\
+          \",\n            answer_text=build_answer(best_item[\"problem\"], best_item[\"\
+          cause\"], best_item[\"method\"])\n        )\n\n    # 4. 像生活问题但规则库没命中 ->\
+          \ 走知识库\n    life_objects = [\n        \"冰箱\", \"空调\", \"洗衣机\", \"手机\", \"\
+          路由器\", \"网络\", \"wifi\", \"wi-fi\",\n        \"下水道\", \"水龙头\", \"水管\", \"\
+          地漏\", \"厕所\", \"马桶\",\n        \"门\", \"木门\", \"窗\", \"窗户\", \"墙\", \"墙面\"\
+          , \"房间\",\n        \"衣服\", \"鞋子\", \"食物\", \"米饭\", \"电饭煲\", \"插座\", \"灯\"\
+          , \"柜子\", \"书柜\"\n    ]\n\n    life_signals = [\n        \"不制冷\", \"不制热\"\
+          , \"不冷\", \"不热\", \"不排水\", \"不脱水\",\n        \"漏水\", \"堵\", \"堵塞\", \"发霉\"\
+          , \"异味\", \"臭味\", \"故障\",\n        \"打不开\", \"关不上\", \"卡住\", \"发热\", \"\
+          很烫\", \"卡顿\",\n        \"断网\", \"网速慢\", \"连不上网\", \"排水慢\", \"返潮\", \"潮湿\"\
+          ,\n        \"滴水\", \"不亮\", \"不转\", \"异响\", \"夹生\", \"煮不熟\",\n        \"\
+          有点松\", \"松动\", \"漏风\", \"膨胀\", \"变形\"\n    ]\n\n    question_words = [\n\
+          \        \"怎么办\", \"怎么处理\", \"怎么解决\", \"怎么修\", \"怎么回事\", \"为什么\", \"咋办\"\
+          , \"咋处理\"\n    ]\n\n    has_life_object = any(w in text_compact for w in\
+          \ life_objects)\n    has_life_signal = any(w in text_compact for w in life_signals)\n\
+          \    has_question_word = any(w in text_compact for w in question_words)\n\
+          \n    if (has_life_object and has_life_signal) or (has_life_object and has_question_word):\n\
+          \        return make_result(\n            matched=False,\n            need_rag=True,\n\
+          \            need_clarify=False,\n            problem=\"规则库未命中\",\n    \
+          \        cause=\"当前本地规则中没有找到完全匹配的问题，可能是问题描述方式特殊，或需要结合知识库进一步检索。\",\n    \
+          \        method=\"建议进入生活知识库检索流程，结合知识库和大模型进行回答。\",\n            rag_query=raw_text,\n\
+          \            answer_text=\"\"\n        )\n\n    # 5. 其他所有非生活问题 -> 兜底\n \
+          \   return make_result(\n        matched=False,\n        need_rag=False,\n\
+          \        need_clarify=False,\n        problem=\"非生活问题或日常对话\",\n        cause=\"\
+          \",\n        method=\"\",\n        rag_query=\"\",\n        answer_text=\"\
+          我主要帮你处理日常生活问题。你可以描述得更具体一点，比如是什么东西出了问题、出现了什么现象、在什么场景下发生的。\"\n    )"
+        code_language: python3
+        outputs:
+          answer_text:
+            children: null
+            type: string
+          cause:
+            children: null
+            type: string
+          matched:
+            children: null
+            type: boolean
+          method:
+            children: null
+            type: string
+          need_clarify:
+            children: null
+            type: boolean
+          need_rag:
+            children: null
+            type: boolean
+          problem:
+            children: null
+            type: string
+          rag_query:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - sys
+          - query
+          value_type: string
+          variable: query
+      height: 51
+      id: '1787819595246'
+      position:
+        x: 342
+        y: 212.03730158730156
+      positionAbsolute:
+        x: 342
+        y: 212.03730158730156
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: f04a1a00-fdad-47d6-8aa0-be5ff4041261
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787819595246'
+            - need_clarify
+          id: 'true'
+          logical_operator: and
+        - case_id: aac5656f-e62a-4252-836d-75632ddb776a
+          conditions:
+          - comparison_operator: is
+            id: 0e11ae8b-e045-484d-b868-c60660db9089
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787819595246'
+            - matched
+          id: aac5656f-e62a-4252-836d-75632ddb776a
+          logical_operator: and
+        - case_id: d166f6d4-eb99-4d6d-bc23-3ccd02215b7c
+          conditions:
+          - comparison_operator: is
+            id: 5dca4e63-e9eb-4be7-80fd-076672c584e0
+            value: false
+            varType: boolean
+            variable_selector:
+            - '1787819595246'
+            - matched
+          - comparison_operator: is
+            id: 25082186-8f28-4650-b100-69cf849fef88
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787819595246'
+            - need_rag
+          id: d166f6d4-eb99-4d6d-bc23-3ccd02215b7c
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 269
+      id: '1787819607242'
+      position:
+        x: 683
+        y: 111.53730158730156
+      positionAbsolute:
+        x: 683
+        y: 111.53730158730156
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 6243a092-b3a6-4a7a-bde3-dd472aa79029
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787819595246'
+            - matched
+          - comparison_operator: is
+            id: 9c69381c-fec5-4aa7-865d-94b35c38f356
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787819595246'
+            - need_rag
+          id: 'true'
+          logical_operator: or
+        selected: false
+        title: 条件分支 2
+        type: if-else
+      height: 149
+      id: '1787820227960'
+      position:
+        x: 2789
+        y: 261.1678571428571
+      positionAbsolute:
+        x: 2789
+        y: 261.1678571428571
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b6de2766-5ffa-41e5-ab1a-e8ca9fe6f9bf
+          role: system
+          text: 'Plain Text
+
+            你是“生活智能客服”。
+
+            当前用户输入过于简短、模糊，暂时无法判断具体生活问题。
+
+             
+
+            你的任务是礼貌地追问用户，让用户补充更具体的信息。
+
+             
+
+            要求：
+
+            不要直接判断成某个具体故障。
+
+            不要编造用户没有说出的生活问题。
+
+            不要输出检验步骤。
+
+            不要输出维修方案。
+
+            不要提到图片生成、知识库、RAG、工作流、节点。
+
+            不要输出代码、JSON 或内部变量。
+
+            回复要简洁自然。
+
+            不要输出思考过程，不要输出<think>。
+
+            追问重点：
+
+            是什么东西出了问题
+
+            具体表现是什么
+
+            在什么场景下发生
+
+            持续多久了
+
+            输出要求：
+
+            直接输出一段自然追问，不要加标题。'
+        - id: 8013ce7c-6ff1-4f40-afd6-5707b39ae8a6
+          role: user
+          text: 'Plain Text
+
+             用户输入：{{{#sys.query#}}}}
+
+             
+
+            可参考提示：{{{#1787819595246.answer_text#}}}}
+
+             
+
+            请生成一条澄清追问'
+        selected: false
+        title: LLM2澄清追问
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1787820352815'
+      position:
+        x: 1746
+        y: 9.5
+      positionAbsolute:
+        x: 1746
+        y: 9.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 26f6d0c3-c80e-4313-b710-be92c026af75
+          role: system
+          text: 'Plain Text
+
+            你是“生活智能客服”。
+
+             
+
+            当前用户的问题已经被本地规则库判断为明确的生活问题。你会收到问题判断、可能原因和处理方法。
+
+             
+
+            你的任务是把这些结构化内容整理成自然、清晰、适合普通用户阅读的生活问题处理建议。
+
+             
+
+            重要输出限制：
+
+            只能输出给用户看的最终答案。
+
+            不要输出思考过程、分析过程、推理过程。
+
+            不要输出<think> 或 </think>。
+
+            不要输出“已深度思考”。
+
+            不要输出代码、JSON、变量名、节点名、工作流信息。
+
+            不要输出NEED_FALLBACK、NEED_RAG、MATCHED、NEED_IMAGE 等内部标记。
+
+            不要提到知识库、RAG、图片生成、工作流、节点。
+
+            输出格式固定为：
+
+             
+
+            【问题判断】
+
+            【可能原因】
+
+            【处理方法】
+
+            【何时进一步求助】'
+        - id: 83b86902-6210-4e3e-b6d0-249431830209
+          role: user
+          text: 'Plain Text
+
+            问题判断：{{{#1787819595246.problem#}}}}
+
+             
+
+            可能原因：{{{#1787819595246.method#}}}}
+
+             
+
+            处理方法：{{{#1787819595246.method#}}}}
+
+             
+
+            请整理成自然、清晰的最终回复。'
+        selected: false
+        title: LLM 1命中润色
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1787820371291'
+      position:
+        x: 1746
+        y: 176.5
+      positionAbsolute:
+        x: 1746
+        y: 176.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - cMV6xoQ/hnW+iqmgMR9Fq4W+I+XHp5ehGCcQs9ggpgSB391Ecj9bHhDyQQWo8WLK
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1787819288800'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 89
+      id: '1787820394626'
+      position:
+        x: 1044
+        y: 371.1666666666667
+      positionAbsolute:
+        x: 1044
+        y: 371.1666666666667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 58bbeded-7fa9-41ad-83bf-8477efaca1d5
+          role: system
+          text: 'Plain Text
+
+            你是“生活智能客服”，也是一个轻量级生活小助手。
+
+            当前用户输入没有被前面的规则库或知识库明确命中，但你仍然需要尽量给出自然、有帮助的回复。
+
+             
+
+            你需要根据用户输入判断回复方式：
+
+            如果用户是在打招呼、闲聊、问你是谁、问你能做什么，请自然回应，并简单介绍你可以帮助处理日常生活问题。
+
+            如果用户问的是普通日常小问题，例如生活习惯、清洁收纳、物品使用、简单家务、轻微异常现象，可以直接给出简短实用建议。
+
+            如果用户的问题太短、太模糊，不要直接编造故障原因，要追问用户补充具体信息。
+
+            如果用户问的不是生活相关内容，也可以礼貌回应，并引导用户描述具体生活问题。
+
+            严格要求：
+
+            不要输出NEED_FALLBACK、NEED_RAG、MATCHED、NEED_IMAGE 等内部标记。
+
+            不要输出代码、JSON、变量名或系统字段。
+
+            不要提到知识库、RAG、工作流、节点、模型。
+
+            不要提到图片生成。
+
+            不要输出检验步骤格式。
+
+            不要输出<think>、思考过程、分析过程。
+
+            回复要自然、简短、像正常客服对话。
+
+            如果能直接回答，就直接给建议；如果信息不足，再追问。
+
+            输出要求：
+
+            直接输出一段自然中文回复，不要加标题'
+        - id: 2344e608-cfe3-4378-a41c-eec9e408d071
+          role: user
+          text: 'Plain Text
+
+            用户输入：{{{#sys.query#}}uery}}
+
+            可参考的兜底提示：{{{#1787819595246.answer_text#}}}}
+
+             
+
+            请生成一条自然、有帮助的回复。
+
+            知识检索节点'
+        selected: false
+        title: LLM 4兜底回复
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1787820407001'
+      position:
+        x: 1746
+        y: 588.3
+      positionAbsolute:
+        x: 1746
+        y: 588.3
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 9d3f5ad6-c934-465e-a55b-79598b468fdf
+          role: system
+          text: 'Plain Text
+
+            你是“生活智能客服”。
+
+            当前用户的问题已经被判断为生活问题，但本地规则库没有直接命中，因此需要结合知识库检索内容或用户问题本身，生成生活问题处理建议。
+
+             
+
+            重要要求：
+
+            绝对不要输出NEED_FALLBACK。
+
+            绝对不要输出NEED_RAG、MATCHED、NEED_IMAGE、fallback 等内部标记。
+
+            不要输出代码、JSON、变量名或系统字段。
+
+            不要输出图片链接。
+
+            不要输出Markdown 图片语法。
+
+            不要提到知识库、RAG、工作流、节点、模型。
+
+            不要输出“已深度思考”。
+
+            不要输出思考过程，不要输出<think>。
+
+            如果知识库内容不足，也不要输出内部标记，而是给出谨慎、通用、可执行的排查建议。
+
+            输出格式固定为：
+
+             
+
+            【问题判断】
+
+            【可能原因】
+
+            【处理方法】
+
+            【何时进一步求助】'
+        - id: 45d6832e-364c-4062-a8fd-cc69b41c2872
+          role: user
+          text: 'Plain Text
+
+            用户问题：{{{#sys.query#}}}}
+
+            知识库检索内容：{{{#context#}}}
+
+             
+
+            请根据用户问题和检索内容生成生活问题处理建议。
+
+            如果检索内容不足，请基于用户问题给出谨慎、通用、可执行的建议。'
+        selected: false
+        title: LLM 3RAG润色
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1787820599916'
+      position:
+        x: 1746
+        y: 399.3
+      positionAbsolute:
+        x: 1746
+        y: 399.3
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 1f479538-953b-4c5b-9217-3cf9584dfb2a
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1787820394626'
+            - result
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支 3
+        type: if-else
+      height: 123
+      id: '1787820873153'
+      position:
+        x: 1385
+        y: 369
+      positionAbsolute:
+        x: 1385
+        y: 369
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        items:
+        - input_type: constant
+          operation: +=
+          value: 1
+          variable_selector:
+          - conversation
+          - clarify_count
+        - input_type: constant
+          operation: set
+          value: clarify
+          variable_selector:
+          - conversation
+          - last_round
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1787819595246'
+          - problem
+          variable_selector:
+          - conversation
+          - issue_type
+        selected: false
+        title: 变量赋值
+        type: assigner
+        version: '2'
+      height: 135
+      id: '1787821113316'
+      position:
+        x: 2087
+        y: 0
+      positionAbsolute:
+        x: 2087
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        items:
+        - input_type: constant
+          operation: set
+          value: hit
+          variable_selector:
+          - conversation
+          - last_round
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1787819595246'
+          - problem
+          variable_selector:
+          - conversation
+          - issue_type
+        selected: false
+        title: 变量赋值 2
+        type: assigner
+        version: '2'
+      height: 109
+      id: '1787821195971'
+      position:
+        x: 2087
+        y: 180
+      positionAbsolute:
+        x: 2087
+        y: 180
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        items:
+        - input_type: constant
+          operation: set
+          value: rag
+          variable_selector:
+          - conversation
+          - last_round
+        - input_type: constant
+          operation: set
+          value: 知识库问题
+          variable_selector:
+          - conversation
+          - issue_type
+        selected: false
+        title: 变量赋值 3
+        type: assigner
+        version: '2'
+      height: 109
+      id: '1787821223854'
+      position:
+        x: 2087
+        y: 402.8
+      positionAbsolute:
+        x: 2087
+        y: 402.8
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        items:
+        - input_type: constant
+          operation: set
+          value: fallback
+          variable_selector:
+          - conversation
+          - last_round
+        - input_type: constant
+          operation: set
+          value: 未说明问题
+          variable_selector:
+          - conversation
+          - issue_type
+        selected: false
+        title: 变量赋值 4
+        type: assigner
+        version: '2'
+      height: 109
+      id: '1787821318004'
+      position:
+        x: 2087
+        y: 591.8
+      positionAbsolute:
+        x: 2087
+        y: 591.8
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        output_type: string
+        selected: false
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '1787820371291'
+          - text
+        - - '1787820352815'
+          - text
+        - - '1787820599916'
+          - text
+        - - '1787820407001'
+          - text
+      height: 188
+      id: '1787821554759'
+      position:
+        x: 2448
+        y: 210.3345238095238
+      positionAbsolute:
+        x: 2448
+        y: 210.3345238095238
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.8-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 65aac685-f9a3-457f-9b9a-30d54f6f4c3d
+          role: system
+          text: 'Plain Text
+
+            你是“生活小助手”。
+
+             
+
+            请把输入内容整理成适合普通用户执行的“检验步骤”，并在最后自然补充一句追问，引导用户继续补充关键信息。
+
+             
+
+            要求：
+
+            1. 使用简洁自然的中文。
+
+            2. 只保留用户可执行的检查步骤bi。
+
+            3. 最多输出 4 步。
+
+            4. 每一步都要具体、可操作。
+
+            5. 不要输出思考过程。
+
+            6. 不要输出 <think>、分析过程、推理过程。
+
+            7. 不要输出代码、JSON、内部变量或系统标记。
+
+            8. 不要提到图片生成、知识库、RAG、工作流、节点。
+
+            9. 追问语句要和当前生活问题相关，不能泛泛而谈。
+
+            10. 追问语句最多包含 2 个问题。
+
+            11. 追问要像自然对话，不要写成表格调查。
+
+            12. 追问不要放进固定输出格式里。
+
+            13. 不要输出“继续追问：”这个标题。
+
+            14. 直接输出最终结果。
+
+             
+
+            固定输出格式只到下面这一项为止：
+
+             
+
+            问题判断：
+
+            步骤1：
+
+            步骤2：
+
+            步骤3：
+
+            步骤4：
+
+            补充说明：
+
+            何时进一步求助：
+
+             
+
+            在“何时进一步求助”后，空一行，再自然补充一句追问。追问不要加标题。'
+        - id: 1848d0bf-ed40-4d57-99b6-5fb149a845bc
+          role: user
+          text: 'Plain Text
+
+            请根据下面内容整理出检验步骤：
+
+             
+
+            {{{#1787821554759.output#}}'
+        selected: false
+        title: LLM 5检验步骤
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1787821737202'
+      position:
+        x: 3150
+        y: 228.6797619047619
+      positionAbsolute:
+        x: 3150
+        y: 228.6797619047619
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '{{#1787821554759.output#}}'
+        selected: false
+        title: 直接回复 2
+        type: answer
+        variables: []
+      height: 101
+      id: '1787821776736'
+      position:
+        x: 3150
+        y: 395.6797619047619
+      positionAbsolute:
+        x: 3150
+        y: 395.6797619047619
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-168
+            key: ''
+            type: text
+            value: 'JSON
+
+              {
+
+                "model": "wanx2.1-t2i-turbo",
+
+                "input": {
+
+                  "prompt": "{{{#1787821989921.output#}}}}"
+
+                },
+
+                "parameters": {
+
+                  "size": "1024*1024",
+
+                  "n": 1
+
+                }
+
+              }'
+          type: json
+        headers: 'Authorization:Bearer sk-ws-H.EXIEHIH.BTsb.MEQCIGvZHQW97jSyDpJA-xEuAdgSBE562TjzSBkfV4lqmrg5AiByTwRW0j3A2orMJmZPhxRTZCJ0yS9hKRWd71podABEAQ
+
+          Content-Type:application/json
+
+          X-DashScope-Async:enable'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis
+        variables: []
+      height: 152
+      id: '1787821851814'
+      position:
+        x: 3832
+        y: 219.1797619047619
+      positionAbsolute:
+        x: 3832
+        y: 219.1797619047619
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: "Plain Text\r\n请根据下面的检验步骤，生成一张“生活问题分步骤处理示意图”。\r\n \r\n核心目标：\r\n\
+          把步骤内容转化成 3 到 4 个连续画面场景，而不是生成一张普通生活照片。每个画面都要对应一个具体检查动作，让用户能看出处理顺序。\r\n \r\
+          \n画面结构：\r\n竖版构图，分成 3 到 4 个清晰的步骤区域。每个区域都是一个独立的小场景，分别表现观察、检查、处理、进一步求助等动作。整体像高质量生活服务\
+          \ App 的可视化操作指引。\r\n \r\n画面风格：\r\n真实生活场景风格，接近高质量生活服务摄影感或高级写实插画。家居环境自然，光线真实，细节清晰，人物动作自然。不要卡通风，不要夸张\
+          \ 3D，不要抽象图，不要海报风。\r\n \r\n内容要求：\r\n画面必须严格围绕下面的步骤内容生成。要出现和问题相关的物品、工具、故障位置和检查动作。例如家电、门窗、水管、下水道、衣物、室内环境等，根据具体问题自动选择对应场景。\r\
+          \n \r\n重要限制：\r\n图片中不要出现任何中文、英文、数字、标题、标签、步骤编号、字幕、对话框、水印、logo 或乱码字符。\r\n不要把完整步骤文字画进图片里。\r\
+          \n不要生成文字信息卡片。\r\n不要生成无关主题。\r\n不要生成之前的测试场景。\r\n不要只生成单张普通场景图。\r\n \r\n下面是需要转化成画面步骤的内容，仅用于理解画面，不要把文字画进图片里：\r\
+          \n \r\n{{steps_text}}"
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1787821737202'
+          - text
+          value_type: string
+          variable: steps_text
+      height: 51
+      id: '1787821989921'
+      position:
+        x: 3491
+        y: 261.1797619047619
+      positionAbsolute:
+        x: 3491
+        y: 261.1797619047619
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "\nimport json\n\ndef main(body_text: str) -> dict:\n    data = json.loads(body_text)\n\
+          \    task_id = data[\"output\"][\"task_id\"]\n    task_status = data[\"\
+          output\"][\"task_status\"]\n    return {\n        \"task_id\": task_id,\n\
+          \        \"task_status\": task_status\n    }"
+        code_language: python3
+        outputs:
+          task_id:
+            children: null
+            type: string
+          task_status:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 2
+        type: code
+        variables:
+        - value_selector:
+          - '1787821851814'
+          - body
+          value_type: string
+          variable: body_text
+      height: 51
+      id: '1787822061301'
+      position:
+        x: 4173
+        y: 295.0130952380953
+      positionAbsolute:
+        x: 4173
+        y: 295.0130952380953
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        break_conditions:
+        - comparison_operator: is
+          id: 3f56a81c-695b-4125-b73f-bea52dcdeccb
+          value: SUCCEEDED
+          varType: string
+          variable_selector:
+          - '1787822169803'
+          - final_task_status
+        - comparison_operator: is
+          id: 6cf7cc58-5b6d-4906-a158-ea364f8852a6
+          value: FAILED
+          varType: string
+          variable_selector:
+          - conversation
+          - final_task_status
+        - comparison_operator: '='
+          id: 98a389e9-1a8d-457a-b47e-7a4837a12341
+          value: '9'
+          varType: number
+          variable_selector:
+          - conversation
+          - poll_count
+        error_handle_mode: terminated
+        height: 526
+        logical_operator: or
+        loop_count: 30
+        loop_variables:
+        - id: 7dd69dc7-5b21-46e8-a3ad-4a3de9fd34b8
+          label: task_id
+          value:
+          - '1787822061301'
+          - task_id
+          value_type: variable
+          var_type: string
+        - id: 79281789-d980-41ba-9490-7aaa19192943
+          label: final_task_status
+          value: PENDING
+          value_type: constant
+          var_type: string
+        - id: 77d0debe-ac35-4def-9d09-d56a7d324c70
+          label: final_image_url
+          value: ''
+          value_type: constant
+          var_type: string
+        - id: 99720e15-df2d-4099-941a-606680d7a046
+          label: poll_count
+          value: '0'
+          value_type: constant
+          var_type: number
+        selected: false
+        start_node_id: 1787822169803start
+        title: 循环
+        type: loop
+        width: 1789
+      height: 526
+      id: '1787822169803'
+      position:
+        x: 4514
+        y: 66.01309523809522
+      positionAbsolute:
+        x: 4514
+        y: 66.01309523809522
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1789
+      zIndex: 0
+    - data:
+        desc: ''
+        isInLoop: true
+        selected: false
+        title: ''
+        type: loop-start
+      draggable: false
+      height: 48
+      id: 1787822169803start
+      parentId: '1787822169803'
+      position:
+        x: 60
+        y: 157.40476190476193
+      positionAbsolute:
+        x: 4574
+        y: 223.41785714285714
+      selectable: false
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-loop-start
+      width: 44
+      zIndex: 1001
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: Authorization:Bearer sk-ws-H.EXIEHIH.BTsb.MEQCIGvZHQW97jSyDpJA-xEuAdgSBE562TjzSBkfV4lqmrg5AiByTwRW0j3A2orMJmZPhxRTZCJ0yS9hKRWd71podABEAQ
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求 2
+        type: http-request
+        url: https://dashscope.aliyuncs.com/api/v1/tasks/{{#1787822061301.task_id#}}
+        variables: []
+      height: 154
+      id: '1787822183491'
+      parentId: '1787822169803'
+      position:
+        x: 184
+        y: 112.40476190476193
+      positionAbsolute:
+        x: 4698
+        y: 178.41785714285714
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        code: "\nimport json\n \ndef main(body_text: str) -> dict:\n    data = json.loads(body_text)\n\
+          \    output = data.get(\"output\", {})\n    task_status = output.get(\"\
+          task_status\", \"UNKNOWN\")\n \n    image_url = \"\"\n    results = output.get(\"\
+          results\", [])\n    if isinstance(results, list) and len(results) > 0:\n\
+          \        first = results[0]\n        image_url = first.get(\"url\", \"\"\
+          ) or first.get(\"result_url\", \"\") or first.get(\"result\", \"\")\n \n\
+          \    return {\n        \"task_status\": task_status,\n        \"image_url\"\
+          : image_url\n    }"
+        code_language: python3
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        outputs:
+          image_url:
+            children: null
+            type: string
+          task_status:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 3
+        type: code
+        variables:
+        - value_selector:
+          - '1787822183491'
+          - body
+          value_type: string
+          variable: body_text
+      height: 51
+      id: '1787822672073'
+      parentId: '1787822169803'
+      position:
+        x: 505
+        y: 189.5714285714286
+      positionAbsolute:
+        x: 5019
+        y: 255.58452380952383
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: d7819958-f021-4c3d-8749-298bb9d1d8f0
+            value: SUCCEEDED
+            varType: string
+            variable_selector:
+            - '1787822672073'
+            - task_status
+          id: 'true'
+          logical_operator: and
+        - case_id: 70ffc966-15d4-48cb-a637-0e1ab720dca3
+          conditions:
+          - comparison_operator: is
+            id: b270d7e4-68a2-4ee3-8262-3a2bd2e43296
+            value: FAILED
+            varType: string
+            variable_selector:
+            - '1787822672073'
+            - task_status
+          id: 70ffc966-15d4-48cb-a637-0e1ab720dca3
+          logical_operator: and
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        selected: false
+        title: 条件分支 4
+        type: if-else
+      height: 219
+      id: '1787822826730'
+      parentId: '1787822169803'
+      position:
+        x: 826
+        y: 114.0714285714286
+      positionAbsolute:
+        x: 5340
+        y: 180.08452380952383
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1787822672073'
+          - task_status
+          variable_selector:
+          - '1787822169803'
+          - final_task_status
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1787822672073'
+          - image_url
+          variable_selector:
+          - '1787822169803'
+          - final_image_url
+        loop_id: '1787822169803'
+        selected: false
+        title: 变量赋值 5
+        type: assigner
+        version: '2'
+      height: 109
+      id: '1787822909620'
+      parentId: '1787822169803'
+      position:
+        x: 1167
+        y: 60
+      positionAbsolute:
+        x: 5681
+        y: 126.01309523809522
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1787822672073'
+          - task_status
+          variable_selector:
+          - '1787822169803'
+          - final_task_status
+        loop_id: '1787822169803'
+        selected: false
+        title: 变量赋值 6
+        type: assigner
+        version: '2'
+      height: 83
+      id: '1787822914782'
+      parentId: '1787822169803'
+      position:
+        x: 1167
+        y: 229
+      positionAbsolute:
+        x: 5681
+        y: 295.0130952380952
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        code: "\nimport time\ndef main() -> dict:\n    time.sleep(5)\n    return {\"\
+          result\": \"1\"}"
+        code_language: python3
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 4
+        type: code
+        variables: []
+      height: 51
+      id: '1787822920969'
+      parentId: '1787822169803'
+      position:
+        x: 1167
+        y: 372
+      positionAbsolute:
+        x: 5681
+        y: 438.0130952380952
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: true
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1787822672073'
+          - task_status
+          variable_selector:
+          - '1787822169803'
+          - final_task_status
+        - input_type: constant
+          operation: +=
+          value: 1
+          variable_selector:
+          - '1787822169803'
+          - poll_count
+        loop_id: '1787822169803'
+        selected: false
+        title: 变量赋值 7
+        type: assigner
+        version: '2'
+      height: 109
+      id: '1787823150678'
+      parentId: '1787822169803'
+      position:
+        x: 1488
+        y: 351.5
+      positionAbsolute:
+        x: 6002
+        y: 417.5130952380952
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        answer: 退出循环
+        isInIteration: false
+        isInLoop: true
+        loop_id: '1787822169803'
+        selected: false
+        title: 退出循环
+        type: answer
+        variables: []
+      height: 99
+      id: '1787823207641'
+      parentId: '1787822169803'
+      position:
+        x: 1488
+        y: 83.16666666666666
+      positionAbsolute:
+        x: 6002
+        y: 149.17976190476188
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: e2b86b6a-d0b3-4b09-8ada-7ad23882caeb
+            value: SUCCEEDED
+            varType: string
+            variable_selector:
+            - '1787822169803'
+            - final_task_status
+          id: 'true'
+          logical_operator: and
+        - case_id: 7759dad3-be6f-4fcf-8ef8-22ae23316500
+          conditions:
+          - comparison_operator: is
+            id: 38e2e896-d715-4280-801a-f29e9308e283
+            value: FAILED
+            varType: string
+            variable_selector:
+            - '1787822169803'
+            - final_task_status
+          id: 7759dad3-be6f-4fcf-8ef8-22ae23316500
+          logical_operator: and
+        selected: false
+        title: 条件分支 5
+        type: if-else
+      height: 219
+      id: '1787823445155'
+      position:
+        x: 6403
+        y: 307.1797619047619
+      positionAbsolute:
+        x: 6403
+        y: 307.1797619047619
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: "Plain Text\r\n## 检验步骤\r\n\r\n{{steps_text}}\r\n\r\n{% if image_url\
+          \ %}\r\n![检验步骤示意图]({{image_url}})\r\n{% endif %}"
+        title: 模板转换 2
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1787821737202'
+          - text
+          value_type: string
+          variable: steps_text
+        - value_selector:
+          - '1787822169803'
+          - final_image_url
+          value_type: string
+          variable: image_url
+      height: 51
+      id: '1787823549758'
+      position:
+        x: 6764
+        y: 271.2884920634921
+      positionAbsolute:
+        x: 6764
+        y: 271.2884920634921
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: "Plain Text\r\n## 检验步骤\r\n\r\n{{steps_text}}\r\n\r\n> 图片生成失败了，不过你可以先按上面的步骤进行排查；如果需要，我也可以继续用纯文字方式帮你分析。"
+        title: 模板转换 3
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1787821737202'
+          - text
+          value_type: string
+          variable: steps_text
+      height: 51
+      id: '1787823673376'
+      position:
+        x: 6764
+        y: 402.2884920634921
+      positionAbsolute:
+        x: 6764
+        y: 402.2884920634921
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: "Plain Text\r\n## 检验步骤\r\n\r\n{{steps_text}}\r\n\r\n> 图片还在生成中，你可以先按上面的步骤进行检查；如果稍后需要，我可以再继续补充图示说明。"
+        title: 模板转换 4
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1787821737202'
+          - text
+          value_type: string
+          variable: steps_text
+      height: 51
+      id: '1787823727082'
+      position:
+        x: 6764
+        y: 533.2884920634921
+      positionAbsolute:
+        x: 6764
+        y: 533.2884920634921
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        output_type: string
+        selected: false
+        title: 变量聚合器 2
+        type: variable-aggregator
+        variables:
+        - - '1787823727082'
+          - output
+        - - '1787823673376'
+          - output
+        - - '1787823549758'
+          - output
+      height: 161
+      id: '1787823777584'
+      position:
+        x: 7125
+        y: 441.4134920634921
+      positionAbsolute:
+        x: 7125
+        y: 441.4134920634921
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        answer: '{{#1787823777584.output#}}'
+        selected: false
+        title: 直接回复 4
+        type: answer
+        variables: []
+      height: 101
+      id: '1787823854322'
+      position:
+        x: 7466
+        y: 498.2468253968254
+      positionAbsolute:
+        x: 7466
+        y: 498.2468253968254
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    viewport:
+      x: -2039.0499999999993
+      y: 494.87722222222214
+      zoom: 0.7
+  rag_pipeline_variables: []
